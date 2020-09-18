@@ -4,26 +4,26 @@ import { Button } from 'react-bootstrap';
 
 const App = () => {
 	const [display, setDisplay] = useState("0");
-	const [currentValue, setCurrentValue] = useState();
+	const [currentValue, setCurrentValue] = useState("0");
 
 	const clear = () => {
 		setDisplay("0");
-		setCurrentValue();
+		setCurrentValue("");
 	}
 
 	const clickNumber = (value) => {
 		return () => {
-			setDisplay(value);
-			setCurrentValue(value);
-		};
+			setDisplay(parseInt(display.toString().concat(value)).toString().substr(0, 16));
+			setCurrentValue(parseInt(currentValue.toString().concat(value)).toString().substr(0, 16));
+		}
 	}
 
 
   	return (
     	<div>
-	    	<Button id="equals">=</Button>
-	    	<Button id="zero" onClick={(clickNumber("1"))}>0</Button>
-	    	<Button id="one" onClick={(clickNumber("1"))}>1</Button>
+    		<h1>Javascript Calculator</h1>
+	    	<Button id="zero" onClick={clickNumber("0")}>0</Button>
+	    	<Button id="one" onClick={clickNumber("1")}>1</Button>
 	    	<Button id="two" onClick={clickNumber("2")}>2</Button>
 	    	<Button id="three" onClick={clickNumber("3")}>3</Button>
 	    	<Button id="four" onClick={clickNumber("4")}>4</Button>
@@ -37,6 +37,7 @@ const App = () => {
 	    	<Button id="multiply">*</Button>
 	    	<Button id="divide">:</Button>
 	    	<Button id="decimal">.</Button>
+	    	<Button id="equals">=</Button>
 	    	<Button id="clear" onClick={clear}>clear</Button>
 	    	<div id="display">{display}</div>
     	</div>
