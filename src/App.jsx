@@ -5,16 +5,19 @@ import { Button } from 'react-bootstrap';
 const App = () => {
 	const [display, setDisplay] = useState("0");
 	const [currentValue, setCurrentValue] = useState("0");
+	const [formulaScreen, setFormulaScreen] = useState("");
 
 	const clear = () => {
 		setDisplay("0");
-		setCurrentValue("");
+		setCurrentValue("0");
+		setFormulaScreen("");
 	}
 
 	const clickNumber = (value) => {
 		return () => {
 			setDisplay(parseInt(display.toString().concat(value)).toString().substr(0, 16));
 			setCurrentValue(parseInt(currentValue.toString().concat(value)).toString().substr(0, 16));
+			setFormulaScreen(parseInt(formulaScreen.toString().concat(value)).toString().substr(0, 16))
 		}
 	}
 
@@ -39,6 +42,7 @@ const App = () => {
 	    	<Button id="decimal">.</Button>
 	    	<Button id="equals">=</Button>
 	    	<Button id="clear" onClick={clear}>clear</Button>
+	    	<div id="formulascreen">{formulaScreen}</div>
 	    	<div id="display">{display}</div>
     	</div>
     );
