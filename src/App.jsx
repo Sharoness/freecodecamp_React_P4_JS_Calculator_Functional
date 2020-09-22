@@ -15,6 +15,9 @@ const App = () => {
 			if (op === "-") {
 				setLastValue((parseInt(lastValue) - parseInt(display)).toString());
 			}
+			if (op === "*") {
+				setLastValue((parseInt(lastValue) * parseInt(display)).toString());
+			}
 		}
 	}
 
@@ -62,6 +65,20 @@ const App = () => {
 		}
 	}
 
+	const multiply = () => {
+		console.log("substract last value: ", lastValue);
+		console.log("substract display: ", display);
+		if (lastValue === "0") {
+			setLastValue(display);
+			setOperator("*");
+			setDisplay("");
+		} else {
+			setLastValue(calculate("*"));
+			setDisplay("");
+			setOperator("*");
+		}
+	}
+
 	const equals = (op) => {
 		return () => {
 			console.log("equals last value: ", lastValue);
@@ -86,7 +103,7 @@ const App = () => {
 	    	<Button id="nine" onClick={clickNumber("9")}>9</Button>
 	    	<Button id="add" onClick={add}>+</Button>
 	    	<Button id="subtract" onClick={substract}>-</Button>
-	    	<Button id="multiply">*</Button>
+	    	<Button id="multiply" onClick={multiply}>*</Button>
 	    	<Button id="divide">:</Button>
 	    	<Button id="decimal">.</Button>
 	    	<Button id="equals" onClick={equals(operator)}>=</Button>
