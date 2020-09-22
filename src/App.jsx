@@ -4,20 +4,51 @@ import { Button } from 'react-bootstrap';
 
 const App = () => {
 	const [display, setDisplay] = useState("0");
-	const [currentValue, setCurrentValue] = useState("0");
+	const [lastValue, setLastValue] = useState("0");
+	const [operator, setOperator] = useState("");
+
+	const rekenen = (op) => {
+		return () => {
+			if (op === "+") {
+				setLastValue((parseInt(display) + parseInt(lastValue)).toString());
+			}			
+			//console.log("rek op", op)
+			//console.log("rek val1", val1)
+			//console.log("rek val2", val2)
+			//console.log("rek lastValue", lastValue)
+
+		}
+	}
 
 	const clear = () => {
 		setDisplay("0");
-		setCurrentValue("0");
+		setLastValue("0");
 	}
 
 	const clickNumber = (value) => {
 		return () => {
+			//console.log("num last value: ", lastValue)
+			//console.log("num display: ", display)
+			//console.log("num operator: ", operator)
+			//console.log("num check ", ((parseInt(lastValue) + parseInt(display)).toString()))
 			setDisplay(parseInt(display.toString().concat(value)).toString().substr(0, 16));
-			setCurrentValue(parseInt(currentValue.toString().concat(value)).toString().substr(0, 16));
 		}
 	}
 
+	const add = () => {
+		//console.log("add last value: ", lastValue)
+		//console.log("add display: ", display)
+		//console.log("add operator: ", operator)
+		if (lastValue === "0") {
+			setLastValue(display);
+			setOperator("+");
+			setDisplay("");
+		} else {
+			setLastValue(rekenen("+"));
+			setDisplay("");
+			setOperator("+");
+		}
+	}
 
   	return (
     	<div>
@@ -32,7 +63,7 @@ const App = () => {
 	    	<Button id="seven" onClick={clickNumber("7")}>7</Button>
 	    	<Button id="eight" onClick={clickNumber("8")}>8</Button>
 	    	<Button id="nine" onClick={clickNumber("9")}>9</Button>
-	    	<Button id="add">+</Button>
+	    	<Button id="add" onClick={add}>+</Button>
 	    	<Button id="subtract">-</Button>
 	    	<Button id="multiply">*</Button>
 	    	<Button id="divide">:</Button>
