@@ -27,6 +27,7 @@ const App = () => {
 	const clear = () => {
 		setDisplay("0");
 		setLastValue("0");
+		setOperator("")
 	}
 
 	const clickNumber = (value) => {
@@ -102,6 +103,7 @@ const App = () => {
 			console.log("equals display: ", display);
 			setLastValue(calculate(op));
 			setDisplay(lastValue);
+			setOperator("=");
 		}
 	}
 
