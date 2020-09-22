@@ -7,16 +7,11 @@ const App = () => {
 	const [lastValue, setLastValue] = useState("0");
 	const [operator, setOperator] = useState("");
 
-	const rekenen = (op) => {
+	const calculate = (op) => {
 		return () => {
 			if (op === "+") {
 				setLastValue((parseInt(display) + parseInt(lastValue)).toString());
 			}			
-			//console.log("rek op", op)
-			//console.log("rek val1", val1)
-			//console.log("rek val2", val2)
-			//console.log("rek lastValue", lastValue)
-
 		}
 	}
 
@@ -27,8 +22,8 @@ const App = () => {
 
 	const clickNumber = (value) => {
 		return () => {
-			//console.log("num last value: ", lastValue)
-			//console.log("num display: ", display)
+			console.log("num last value: ", lastValue)
+			console.log("num display: ", display)
 			//console.log("num operator: ", operator)
 			//console.log("num check ", ((parseInt(lastValue) + parseInt(display)).toString()))
 			setDisplay(parseInt(display.toString().concat(value)).toString().substr(0, 16));
@@ -36,17 +31,26 @@ const App = () => {
 	}
 
 	const add = () => {
-		//console.log("add last value: ", lastValue)
-		//console.log("add display: ", display)
+		console.log("add last value: ", lastValue)
+		console.log("add display: ", display)
 		//console.log("add operator: ", operator)
 		if (lastValue === "0") {
 			setLastValue(display);
 			setOperator("+");
 			setDisplay("");
 		} else {
-			setLastValue(rekenen("+"));
+			setLastValue(calculate("+"));
 			setDisplay("");
 			setOperator("+");
+		}
+	}
+
+	const equals = (op) => {
+		return () => {
+			console.log("equals last value: ", lastValue);
+			console.log("equals display: ", display);
+			setLastValue(calculate(op));
+			setDisplay(lastValue);
 		}
 	}
 
@@ -68,7 +72,7 @@ const App = () => {
 	    	<Button id="multiply">*</Button>
 	    	<Button id="divide">:</Button>
 	    	<Button id="decimal">.</Button>
-	    	<Button id="equals">=</Button>
+	    	<Button id="equals" onClick={equals(operator)}>=</Button>
 	    	<Button id="clear" onClick={clear}>clear</Button>
 	    	<div id="display">{display}</div>
     	</div>
