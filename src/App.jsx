@@ -9,8 +9,12 @@ const App = () => {
 
 	const calculate = (op) => {
 		return () => {
+			console.log("calculate display, lastvalue ", display, lastValue)
+			console.log("@@2", display, parseInt(display));
+			console.log("@@", lastValue, parseInt(lastValue));
+			console.log("@", operator)
 			if (op === "+") {
-				setLastValue((parseInt(display) + parseInt(lastValue)).toString());
+				setLastValue((parseInt(lastValue) + parseInt(display)).toString());
 			}
 			if (op === "-") {
 				setLastValue((parseInt(lastValue) - parseInt(display)).toString());
@@ -18,7 +22,7 @@ const App = () => {
 			if (op === "*") {
 				setLastValue((parseInt(lastValue) * parseInt(display)).toString());
 			}
-			if (op === ":") {
+			if (op === "/") {
 				setLastValue((parseInt(lastValue) / parseInt(display)).toString());
 			}
 		}
@@ -34,22 +38,30 @@ const App = () => {
 		return () => {
 			console.log("num last value: ", lastValue)
 			console.log("num display: ", display)
-			//console.log("num operator: ", operator)
+			console.log("num operator: ", operator)
 			//console.log("num check ", ((parseInt(lastValue) + parseInt(display)).toString()))
-			setDisplay(parseInt(display.toString().concat(value)).toString().substr(0, 16));
+			//console.log("@@", display.toString().concat(value), parseInt(display.toString().concat(value)));
+			if (display === "" && lastValue !== "0" && operator === "") {
+				setLastValue("0");
+				setDisplay(parseInt(display.toString().concat(value)).toString().substr(0, 16));
+			} else {
+				setDisplay(parseInt(display.toString().concat(value)).toString().substr(0, 16));
+			}
 		}
 	}
 
 	const add = () => {
 		console.log("add last value: ", lastValue)
 		console.log("add display: ", display)
-		//console.log("add operator: ", operator)
-		if (lastValue === "0") {
+		console.log("add operator: ", operator)
+		if ((display === "" && operator !== "" && lastValue !== "0") || (display === "" && operator === "")) { // als er al op een operator is gedrukt || direct na =
+			setOperator("+");
+		} else if (lastValue === "0" && operator === "") { // begin, na num ingeklikt te hebben
 			setLastValue(display);
 			setOperator("+");
 			setDisplay("");
-		} else {
-			setLastValue(calculate("+"));
+		} else if ((display !== "" && lastValue !== "0" && operator !== "") || (display !== "" && lastValue === "0" && operator !== "")) { // ergens middenin
+			setLastValue(calculate(operator));
 			setDisplay("");
 			setOperator("+");
 		}
@@ -57,13 +69,16 @@ const App = () => {
 
 	const substract = () => {
 		console.log("substract last value: ", lastValue);
-		console.log("substract display: ", display);
-		if (lastValue === "0") {
+		//console.log("substract display: ", display);
+		console.log("substract operator: ", operator)
+		if ((display === "" && operator !== "" && lastValue !== "0") || (display === "" && operator === "")) {
+			setOperator("-");
+		} else if (lastValue === "0" && operator === "") {
 			setLastValue(display);
 			setOperator("-");
 			setDisplay("");
-		} else {
-			setLastValue(calculate("-"));
+		} else if ((display !== "" && lastValue !== "0" && operator !== "") || (display !== "" && lastValue === "0" && operator !== "")) {
+			setLastValue(calculate(operator));
 			setDisplay("");
 			setOperator("-");
 		}
@@ -71,13 +86,16 @@ const App = () => {
 
 	const multiply = () => {
 		console.log("multiply last value: ", lastValue);
-		console.log("multiply display: ", display);
-		if (lastValue === "0") {
+		//console.log("multiply display: ", display);
+		console.log("multiply operator: ", operator)
+		if ((display === "" && operator !== "" && lastValue !== "0") || (display === "" && operator === "")) {
+			setOperator("*");
+		} else if (lastValue === "0" && operator === "") {
 			setLastValue(display);
 			setOperator("*");
 			setDisplay("");
-		} else {
-			setLastValue(calculate("*"));
+		} else if ((display !== "" && lastValue !== "0" && operator !== "") || (display !== "" && lastValue === "0" && operator !== "")) {
+			setLastValue(calculate(operator));
 			setDisplay("");
 			setOperator("*");
 		}
@@ -85,25 +103,29 @@ const App = () => {
 
 	const divide = () => {
 		console.log("divide last value: ", lastValue);
-		console.log("divide display: ", display);
-		if (lastValue === "0") {
+		//console.log("divide display: ", display);
+		console.log("divide operator: ", operator);
+		if ((display === "" && operator !== "" && lastValue !== "0") || (display === "" && operator === "")) {
+			setOperator("/");
+		} else if (lastValue === "0" && operator === "") {
 			setLastValue(display);
-			setOperator(":");
+			setOperator("/");
 			setDisplay("");
-		} else {
-			setLastValue(calculate(":"));
+		} else if ((display !== "" && lastValue !== "0" && operator !== "") || (display !== "" && lastValue === "0" && operator !== "")) {
+			setLastValue(calculate(operator));
 			setDisplay("");
-			setOperator(":");
+			setOperator("/");
 		}
 	}
 
 	const equals = (op) => {
 		return () => {
 			console.log("equals last value: ", lastValue);
-			console.log("equals display: ", display);
-			setLastValue(calculate(op));
-			setDisplay(lastValue);
-			setOperator("=");
+			//console.log("equals display: ", display);
+			console.log("equals operator: ", operator);
+			setLastValue(calculate(operator));
+			setDisplay("");
+			setOperator("");
 		}
 	}
 
@@ -123,11 +145,11 @@ const App = () => {
 	    	<Button id="add" onClick={add}>+</Button>
 	    	<Button id="subtract" onClick={substract}>-</Button>
 	    	<Button id="multiply" onClick={multiply}>*</Button>
-	    	<Button id="divide" onClick={divide}>:</Button>
+	    	<Button id="divide" onClick={divide}>/</Button>
 	    	<Button id="decimal">.</Button>
 	    	<Button id="equals" onClick={equals(operator)}>=</Button>
 	    	<Button id="clear" onClick={clear}>clear</Button>
-	    	<div id="display">{display}</div>
+	    	<div id="display">{(display === "0" || display === "") ? lastValue : display}</div>
     	</div>
     );
 }
