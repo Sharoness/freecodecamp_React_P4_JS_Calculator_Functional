@@ -10,20 +10,20 @@ const App = () => {
 	const calculate = (op) => {
 		return () => {
 			console.log("calculate display, lastvalue ", display, lastValue)
-			console.log("@@2", display, parseInt(display));
-			console.log("@@", lastValue, parseInt(lastValue));
+			console.log("@@2", display, parseFloat(display));
+			console.log("@@", lastValue, parseFloat(lastValue));
 			console.log("@", operator)
 			if (op === "+") {
-				setLastValue((parseInt(lastValue) + parseInt(display)).toString());
+				setLastValue((parseFloat(lastValue) + parseFloat(display)).toString());
 			}
 			if (op === "-") {
-				setLastValue((parseInt(lastValue) - parseInt(display)).toString());
+				setLastValue((parseFloat(lastValue) - parseFloat(display)).toString());
 			}
 			if (op === "*") {
-				setLastValue((parseInt(lastValue) * parseInt(display)).toString());
+				setLastValue((parseFloat(lastValue) * parseFloat(display)).toString());
 			}
 			if (op === "/") {
-				setLastValue((parseInt(lastValue) / parseInt(display)).toString());
+				setLastValue((parseFloat(lastValue) / parseFloat(display)).toString());
 			}
 		}
 	}
@@ -39,13 +39,17 @@ const App = () => {
 			console.log("num last value: ", lastValue)
 			console.log("num display: ", display)
 			console.log("num operator: ", operator)
-			//console.log("num check ", ((parseInt(lastValue) + parseInt(display)).toString()))
-			//console.log("@@", display.toString().concat(value), parseInt(display.toString().concat(value)));
+			//console.log("num check ", ((parseFloat(lastValue) + parseFloat(display)).toString()))
+			//console.log("@@", display.toString().concat(value), parseFloat(display.toString().concat(value)));
 			if (display === "" && lastValue !== "0" && operator === "") {
 				setLastValue("0");
-				setDisplay(parseInt(display.toString().concat(value)).toString().substr(0, 16));
+				setDisplay(parseFloat(display.toString().concat(value)).toString().substr(0, 16));
+			} else if (display.includes(".") && value === "0") { // 0 intypen na .
+				setDisplay(display.concat(value));
+			} else if (display.includes(".")) { // nummers na . intypen
+				setDisplay(parseFloat(display.toString().concat(value)).toString().substr(0, 16));
 			} else {
-				setDisplay(parseInt(display.toString().concat(value)).toString().substr(0, 16));
+				setDisplay(parseFloat(display.toString().concat(value)).toString().substr(0, 16));
 			}
 		}
 	}
@@ -144,7 +148,9 @@ const App = () => {
 		return () => {
 			console.log("decimal value", value);
 			console.log("decimal display", display);
-			setDisplay(display.concat(value));
+			if (!display.includes(".")) { // zodat er maar 1 . kan zijn
+				setDisplay(display.concat(value));
+			}
 		}
 	}
 
