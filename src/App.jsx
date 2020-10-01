@@ -56,6 +56,9 @@ const App = () => {
 		console.log("add operator: ", operator)
 		if ((display === "" && operator !== "" && lastValue !== "0") || (display === "" && operator === "")) { // als er al op een operator is gedrukt || direct na =
 			setOperator("+");
+		} else if (display === "-") {
+			setOperator("+");
+			setDisplay("");
 		} else if (lastValue === "0" && operator === "") { // begin, na num ingeklikt te hebben
 			setLastValue(display);
 			setOperator("+");
@@ -71,7 +74,9 @@ const App = () => {
 		console.log("substract last value: ", lastValue);
 		//console.log("substract display: ", display);
 		console.log("substract operator: ", operator)
-		if ((display === "" && operator !== "" && lastValue !== "0") || (display === "" && operator === "")) {
+		if (display === "" && operator !== "" && lastValue !== "0") { // na andere operator klikken
+			setDisplay("-");
+		} else if (display === "" && operator === "") { // direct na =
 			setOperator("-");
 		} else if (lastValue === "0" && operator === "") {
 			setLastValue(display);
@@ -90,6 +95,9 @@ const App = () => {
 		console.log("multiply operator: ", operator)
 		if ((display === "" && operator !== "" && lastValue !== "0") || (display === "" && operator === "")) {
 			setOperator("*");
+		} else if (display === "-") {
+			setOperator("*");
+			setDisplay("");
 		} else if (lastValue === "0" && operator === "") {
 			setLastValue(display);
 			setOperator("*");
@@ -107,6 +115,9 @@ const App = () => {
 		console.log("divide operator: ", operator);
 		if ((display === "" && operator !== "" && lastValue !== "0") || (display === "" && operator === "")) {
 			setOperator("/");
+		} else if (display === "-") {
+			setOperator("/");
+			setDisplay("");
 		} else if (lastValue === "0" && operator === "") {
 			setLastValue(display);
 			setOperator("/");
