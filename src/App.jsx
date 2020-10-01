@@ -140,6 +140,14 @@ const App = () => {
 		}
 	}
 
+	const decimal = (value) => {
+		return () => {
+			console.log("decimal value", value);
+			console.log("decimal display", display);
+			setDisplay(display.concat(value));
+		}
+	}
+
   	return (
     	<div>
     		<h1>Javascript Calculator</h1>
@@ -157,7 +165,7 @@ const App = () => {
 	    	<Button id="subtract" onClick={substract}>-</Button>
 	    	<Button id="multiply" onClick={multiply}>*</Button>
 	    	<Button id="divide" onClick={divide}>/</Button>
-	    	<Button id="decimal">.</Button>
+	    	<Button id="decimal" onClick={decimal(".")}>.</Button>
 	    	<Button id="equals" onClick={equals(operator)}>=</Button>
 	    	<Button id="clear" onClick={clear}>clear</Button>
 	    	<div id="display">{(display === "0" || display === "") ? lastValue : display}</div>
