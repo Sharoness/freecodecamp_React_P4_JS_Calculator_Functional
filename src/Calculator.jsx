@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Display from './Display.jsx';
 import Pad from './Pad.jsx';
- 
-const App = () => {
+
+const Calculator = () => {
 	const [display, setDisplay] = useState("0");
 	const [lastValue, setLastValue] = useState("0");
 	const [operator, setOperator] = useState("");
