@@ -42,100 +42,39 @@ const Pad = ({display, lastValue, operator, setDisplay, setLastValue, setOperato
 		}
 	}
 
-	const add = () => {
-        const hasDisplay = display !== "";
-        const hasOperator = operator !== "";
+	const operatorFunc = (op) => {
+		return () => {
+			const hasDisplay = display !== "";
+			const hasOperator = operator !== "";
+			const lastValueIsZero = lastValue === "0";
 
-		setOperator("+");
-
-		if (hasDisplay) {
-			setDisplay("");
-		} else {
-			return;
-		}
-
-		if (display === "-") {
-			setDisplay("");
-			return;
-		}
+			if (op === "-") {
+				if (!hasDisplay && hasOperator && !lastValueIsZero) {
+					setDisplay("-");
+					return;
+				}
+			}
+			
+			setOperator(op);
+			
+			if (op !== "-") {
+				if (display === "-") {
+					setDisplay("");
+					return;
+				}
+			}
 		
-		if (hasOperator) {
-			setLastValue(calculate(operator));
-		} else {
-			setLastValue(display);
-		}
-	}
-
-	const subtract = () => {
-        const hasDisplay = display !== "";
-        const hasOperator = operator !== "";
-        const lastValueIsZero = lastValue === "0";
-
-		if (!hasDisplay && hasOperator && !lastValueIsZero) {
-			setDisplay("-");
-			return;
-		}
-
-		setOperator("-");
-
-		if (hasDisplay) {
-			setDisplay("");
-		} else {
-			return;
-		}
-
-		if (hasOperator) {
-			setLastValue(calculate(operator));
-		} else {
-			setLastValue(display);
-		}
-	}
-
-	const multiply = () => {
-        const hasDisplay = display !== "";
-        const hasOperator = operator !== "";
-
-		setOperator("*");
-
-		if (hasDisplay) {
-			setDisplay("");
-		} else {
-			return;
-		}
-
-		if (display === "-") {
-			setDisplay("");
-			return;
-		}
-		
-		if (hasOperator) {
-			setLastValue(calculate(operator));
-		} else {
-			setLastValue(display);
-		}
-	}
-
-	const divide = () => {
-        const hasDisplay = display !== "";
-        const hasOperator = operator !== "";
-
-		setOperator("/");
-
-		if (hasDisplay) {
-			setDisplay("");
-		} else {
-			return;
-		}
-
-		if (display === "-") {
-			setDisplay("");
-			return;
-		}
-		
-		if (hasOperator) {
-			setLastValue(calculate(operator));
-		} else {
-			setLastValue(display);
+			if (hasDisplay) {
+				setDisplay("");
+			} else {
+				return;
+			}
+			
+			if (hasOperator) {
+				setLastValue(calculate(operator));
+			} else {
+				setLastValue(display);
+			}
 		}
 	}
 
@@ -167,10 +106,10 @@ const Pad = ({display, lastValue, operator, setDisplay, setLastValue, setOperato
             <Button id="seven" onClick={clickNumber("7")}>7</Button>
             <Button id="eight" onClick={clickNumber("8")}>8</Button>
             <Button id="nine" onClick={clickNumber("9")}>9</Button>
-            <Button id="add" onClick={add}>+</Button>
-            <Button id="subtract" onClick={subtract}>-</Button>
-            <Button id="multiply" onClick={multiply}>*</Button>
-            <Button id="divide" onClick={divide}>/</Button>
+            <Button id="add" onClick={operatorFunc("+")}>+</Button>
+            <Button id="subtract" onClick={operatorFunc("-")}>-</Button>
+            <Button id="multiply" onClick={operatorFunc("*")}>*</Button>
+            <Button id="divide" onClick={operatorFunc("/")}>/</Button>
             <Button id="decimal" onClick={decimal(".")}>.</Button>
             <Button id="equals" onClick={equals(operator)}>=</Button>
             <Button id="clear" onClick={clear}>clear</Button>
