@@ -1,122 +1,142 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
-const Pad = (props) => {
+const Pad = ({display, lastValue, operator, setDisplay, setLastValue, setOperator}) => {
     const calculate = (op) => {
 		return () => {
 			if (op === "+") {
-				props.setLastValue((parseFloat(props.lastValue) + parseFloat(props.display)).toString());
+				setLastValue((parseFloat(lastValue) + parseFloat(display)).toString());
 			}
 			if (op === "-") {
-				props.setLastValue((parseFloat(props.lastValue) - parseFloat(props.display)).toString());
+				setLastValue((parseFloat(lastValue) - parseFloat(display)).toString());
 			}
 			if (op === "*") {
-				props.setLastValue((parseFloat(props.lastValue) * parseFloat(props.display)).toString());
+				setLastValue((parseFloat(lastValue) * parseFloat(display)).toString());
 			}
 			if (op === "/") {
-				props.setLastValue((parseFloat(props.lastValue) / parseFloat(props.display)).toString());
+				setLastValue((parseFloat(lastValue) / parseFloat(display)).toString());
 			}
 		}
 	}
 
 	const clear = () => {
-		props.setDisplay("0");
-		props.setLastValue("0");
-		props.setOperator("")
+		setDisplay("0");
+		setLastValue("0");
+		setOperator("");
 	}
 
 	const clickNumber = (value) => {
+        const hasDisplay = display !== "";
+        const hasOperator = operator !== "";
+        const lastValueIsZero = lastValue === "0";
+
 		return () => {
-			if (props.display === "" && props.lastValue !== "0" && props.operator === "") {
-				props.setLastValue("0");
-				props.setDisplay(parseFloat(props.display.toString().concat(value)).toString().substr(0, 16));
-			} else if (props.display.includes(".") && value === "0") {
-				props.setDisplay(props.display.concat(value));
+			if (!hasDisplay && !lastValueIsZero && !hasOperator) {
+				setLastValue("0");
+				setDisplay(parseFloat(display.toString().concat(value)).toString().substr(0, 16));
+			} else if (display.includes(".") && value === "0") {
+				setDisplay(display.concat(value));
 			} else {
-				props.setDisplay(parseFloat(props.display.toString().concat(value)).toString().substr(0, 16));
+				setDisplay(parseFloat(display.toString().concat(value)).toString().substr(0, 16));
 			}
 		}
 	}
 
 	const add = () => {
-		if ((props.display === "" && props.operator !== "" && props.lastValue !== "0") || (props.display === "" && props.operator === "")) {
-			props.setOperator("+");
-		} else if (props.display === "-") {
-			props.setOperator("+");
-			props.setDisplay("");
-		} else if (props.lastValue === "0" && props.operator === "") {
-			props.setLastValue(props.display);
-			props.setOperator("+");
-			props.setDisplay("");
-		} else if ((props.display !== "" && props.lastValue !== "0" && props.operator !== "") || (props.display !== "" && props.lastValue === "0" && props.operator !== "")) {
-			props.setLastValue(calculate(props.operator));
-			props.setDisplay("");
-			props.setOperator("+");
+        const hasDisplay = display !== "";
+        const hasOperator = operator !== "";
+        const lastValueIsZero = lastValue === "0";
+
+		if ((!hasDisplay && hasOperator && !lastValueIsZero) || (!hasDisplay && !hasOperator)) {
+			setOperator("+");
+		} else if (display === "-") {
+			setOperator("+");
+			setDisplay("");
+		} else if (lastValueIsZero && !hasOperator) {
+			setLastValue(display);
+			setOperator("+");
+			setDisplay("");
+		} else if ((hasDisplay && !lastValueIsZero && hasOperator) || (hasDisplay && lastValueIsZero && hasOperator)) {
+			setLastValue(calculate(operator));
+			setDisplay("");
+			setOperator("+");
 		}
 	}
 
-	const substract = () => {
-		if (props.display === "" && props.operator !== "" && props.lastValue !== "0") {
-			props.setDisplay("-");
-		} else if (props.display === "" && props.operator === "") {
-			props.setOperator("-");
-		} else if (props.lastValue === "0" && props.operator === "") {
-			props.setLastValue(props.display);
-			props.setOperator("-");
-			props.setDisplay("");
-		} else if ((props.display !== "" && props.lastValue !== "0" && props.operator !== "") || (props.display !== "" && props.lastValue === "0" && props.operator !== "")) {
-			props.setLastValue(calculate(props.operator));
-			props.setDisplay("");
-			props.setOperator("-");
+	const subtract = () => {
+        const hasDisplay = display !== "";
+        const hasOperator = operator !== "";
+        const lastValueIsZero = lastValue === "0";
+
+		if (!hasDisplay && hasOperator && !lastValueIsZero) {
+			setDisplay("-");
+		} else if (!hasDisplay && !hasOperator) {
+			setOperator("-");
+		} else if (lastValueIsZero && !hasOperator) {
+			setLastValue(display);
+			setOperator("-");
+			setDisplay("");
+		} else if ((hasDisplay && !lastValueIsZero && hasOperator) || (hasDisplay && lastValueIsZero && hasOperator)) {
+			setLastValue(calculate(operator));
+			setDisplay("");
+			setOperator("-");
 		}
 	}
 
 	const multiply = () => {
-		if ((props.display === "" && props.operator !== "" && props.lastValue !== "0") || (props.display === "" && props.operator === "")) {
-			props.setOperator("*");
-		} else if (props.display === "-") {
-			props.setOperator("*");
-			props.setDisplay("");
-		} else if (props.lastValue === "0" && props.operator === "") {
-			props.setLastValue(props.display);
-			props.setOperator("*");
-			props.setDisplay("");
-		} else if ((props.display !== "" && props.lastValue !== "0" && props.operator !== "") || (props.display !== "" && props.lastValue === "0" && props.operator !== "")) {
-			props.setLastValue(calculate(props.operator));
-			props.setDisplay("");
-			props.setOperator("*");
+        const hasDisplay = display !== "";
+        const hasOperator = operator !== "";
+        const lastValueIsZero = lastValue === "0";
+
+		if ((!hasDisplay && hasOperator && !lastValueIsZero) || (!hasDisplay && !hasOperator)) {
+			setOperator("*");
+		} else if (display === "-") {
+			setOperator("*");
+			setDisplay("");
+		} else if (lastValueIsZero && !hasOperator) {
+			setLastValue(display);
+			setOperator("*");
+			setDisplay("");
+		} else if ((hasDisplay && !lastValueIsZero && hasOperator) || (hasDisplay && lastValueIsZero && hasOperator)) {
+			setLastValue(calculate(operator));
+			setDisplay("");
+			setOperator("*");
 		}
 	}
 
 	const divide = () => {
-		if ((props.display === "" && props.operator !== "" && props.lastValue !== "0") || (props.display === "" && props.operator === "")) {
-			props.setOperator("/");
-		} else if (props.display === "-") {
-			props.setOperator("/");
-			props.setDisplay("");
-		} else if (props.lastValue === "0" && props.operator === "") {
-			props.setLastValue(props.display);
-			props.setOperator("/");
-			props.setDisplay("");
-		} else if ((props.display !== "" && props.lastValue !== "0" && props.operator !== "") || (props.display !== "" && props.lastValue === "0" && props.operator !== "")) {
-			props.setLastValue(calculate(props.operator));
-			props.setDisplay("");
-			props.setOperator("/");
+        const hasDisplay = display !== "";
+        const hasOperator = operator !== "";
+        const lastValueIsZero = lastValue === "0";
+
+		if ((!hasDisplay && hasOperator && !lastValueIsZero) || (!hasDisplay && !hasOperator)) {
+			setOperator("/");
+		} else if (display === "-") {
+			setOperator("/");
+			setDisplay("");
+		} else if (lastValueIsZero && !hasOperator) {
+			setLastValue(display);
+			setOperator("/");
+			setDisplay("");
+		} else if ((hasDisplay && !lastValueIsZero && hasOperator) || (hasDisplay && lastValueIsZero && hasOperator)) {
+			setLastValue(calculate(operator));
+			setDisplay("");
+			setOperator("/");
 		}
 	}
 
 	const equals = (op) => {
 		return () => {
-			props.setLastValue(calculate(props.operator));
-			props.setDisplay("");
-			props.setOperator("");
+			setLastValue(calculate(operator));
+			setDisplay("");
+			setOperator("");
 		}
 	}
 
 	const decimal = (value) => {
 		return () => {
-			if (!props.display.includes(".")) {
-				props.setDisplay(props.display.concat(value));
+			if (!display.includes(".")) {
+				setDisplay(display.concat(value));
 			}
 		}
     }
@@ -134,11 +154,11 @@ const Pad = (props) => {
             <Button id="eight" onClick={clickNumber("8")}>8</Button>
             <Button id="nine" onClick={clickNumber("9")}>9</Button>
             <Button id="add" onClick={add}>+</Button>
-            <Button id="subtract" onClick={substract}>-</Button>
+            <Button id="subtract" onClick={subtract}>-</Button>
             <Button id="multiply" onClick={multiply}>*</Button>
             <Button id="divide" onClick={divide}>/</Button>
             <Button id="decimal" onClick={decimal(".")}>.</Button>
-            <Button id="equals" onClick={equals(props.operator)}>=</Button>
+            <Button id="equals" onClick={equals(operator)}>=</Button>
             <Button id="clear" onClick={clear}>clear</Button>
         </div>
     )
