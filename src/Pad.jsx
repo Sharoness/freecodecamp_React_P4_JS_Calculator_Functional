@@ -42,7 +42,7 @@ const Pad = ({display, lastValue, operator, setDisplay, setLastValue, setOperato
 		}
 	}
 
-	const operatorFunc = (op) => {
+	const operatorHandler = (op) => {
 		return () => {
 			const hasDisplay = display !== "";
 			const hasOperator = operator !== "";
@@ -106,10 +106,10 @@ const Pad = ({display, lastValue, operator, setDisplay, setLastValue, setOperato
             <Button id="seven" onClick={clickNumber("7")}>7</Button>
             <Button id="eight" onClick={clickNumber("8")}>8</Button>
             <Button id="nine" onClick={clickNumber("9")}>9</Button>
-            <Button id="add" onClick={operatorFunc("+")}>+</Button>
-            <Button id="subtract" onClick={operatorFunc("-")}>-</Button>
-            <Button id="multiply" onClick={operatorFunc("*")}>*</Button>
-            <Button id="divide" onClick={operatorFunc("/")}>/</Button>
+            <Button id="add" onClick={operatorHandler("+")}>+</Button>
+            <Button id="subtract" onClick={operatorHandler("-")}>-</Button>
+            <Button id="multiply" onClick={operatorHandler("*")}>*</Button>
+            <Button id="divide" onClick={operatorHandler("/")}>/</Button>
             <Button id="decimal" onClick={decimal(".")}>.</Button>
             <Button id="equals" onClick={equals(operator)}>=</Button>
             <Button id="clear" onClick={clear}>clear</Button>
