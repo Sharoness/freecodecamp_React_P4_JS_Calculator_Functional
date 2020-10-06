@@ -45,21 +45,24 @@ const Pad = ({display, lastValue, operator, setDisplay, setLastValue, setOperato
 	const add = () => {
         const hasDisplay = display !== "";
         const hasOperator = operator !== "";
-        const lastValueIsZero = lastValue === "0";
 
-		if ((!hasDisplay && hasOperator && !lastValueIsZero) || (!hasDisplay && !hasOperator)) {
-			setOperator("+");
-		} else if (display === "-") {
-			setOperator("+");
+		setOperator("+");
+
+		if (hasDisplay) {
 			setDisplay("");
-		} else if (lastValueIsZero && !hasOperator) {
-			setLastValue(display);
-			setOperator("+");
+		} else {
+			return;
+		}
+
+		if (display === "-") {
 			setDisplay("");
-		} else if ((hasDisplay && !lastValueIsZero && hasOperator) || (hasDisplay && lastValueIsZero && hasOperator)) {
+			return;
+		}
+		
+		if (hasOperator) {
 			setLastValue(calculate(operator));
-			setDisplay("");
-			setOperator("+");
+		} else {
+			setLastValue(display);
 		}
 	}
 
@@ -70,58 +73,69 @@ const Pad = ({display, lastValue, operator, setDisplay, setLastValue, setOperato
 
 		if (!hasDisplay && hasOperator && !lastValueIsZero) {
 			setDisplay("-");
-		} else if (!hasDisplay && !hasOperator) {
-			setOperator("-");
-		} else if (lastValueIsZero && !hasOperator) {
-			setLastValue(display);
-			setOperator("-");
+			return;
+		}
+
+		setOperator("-");
+
+		if (hasDisplay) {
 			setDisplay("");
-		} else if ((hasDisplay && !lastValueIsZero && hasOperator) || (hasDisplay && lastValueIsZero && hasOperator)) {
+		} else {
+			return;
+		}
+
+		if (hasOperator) {
 			setLastValue(calculate(operator));
-			setDisplay("");
-			setOperator("-");
+		} else {
+			setLastValue(display);
 		}
 	}
 
 	const multiply = () => {
         const hasDisplay = display !== "";
         const hasOperator = operator !== "";
-        const lastValueIsZero = lastValue === "0";
 
-		if ((!hasDisplay && hasOperator && !lastValueIsZero) || (!hasDisplay && !hasOperator)) {
-			setOperator("*");
-		} else if (display === "-") {
-			setOperator("*");
+		setOperator("*");
+
+		if (hasDisplay) {
 			setDisplay("");
-		} else if (lastValueIsZero && !hasOperator) {
-			setLastValue(display);
-			setOperator("*");
+		} else {
+			return;
+		}
+
+		if (display === "-") {
 			setDisplay("");
-		} else if ((hasDisplay && !lastValueIsZero && hasOperator) || (hasDisplay && lastValueIsZero && hasOperator)) {
+			return;
+		}
+		
+		if (hasOperator) {
 			setLastValue(calculate(operator));
-			setDisplay("");
-			setOperator("*");
+		} else {
+			setLastValue(display);
 		}
 	}
 
 	const divide = () => {
         const hasDisplay = display !== "";
         const hasOperator = operator !== "";
-        const lastValueIsZero = lastValue === "0";
 
-		if ((!hasDisplay && hasOperator && !lastValueIsZero) || (!hasDisplay && !hasOperator)) {
-			setOperator("/");
-		} else if (display === "-") {
-			setOperator("/");
+		setOperator("/");
+
+		if (hasDisplay) {
 			setDisplay("");
-		} else if (lastValueIsZero && !hasOperator) {
-			setLastValue(display);
-			setOperator("/");
+		} else {
+			return;
+		}
+
+		if (display === "-") {
 			setDisplay("");
-		} else if ((hasDisplay && !lastValueIsZero && hasOperator) || (hasDisplay && lastValueIsZero && hasOperator)) {
+			return;
+		}
+		
+		if (hasOperator) {
 			setLastValue(calculate(operator));
-			setDisplay("");
-			setOperator("/");
+		} else {
+			setLastValue(display);
 		}
 	}
 
