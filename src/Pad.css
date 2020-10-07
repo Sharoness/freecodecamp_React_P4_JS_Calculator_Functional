@@ -1,0 +1,95 @@
+.gridContainer {
+    display: grid;
+    grid-template-columns: 60px 60px 60px 60px;
+    grid-template-rows: 50px 50px 50px 50px 50px;
+    text-align: center;
+    justify-content: center;
+}
+
+#clear {
+    background-color: #75260c;
+    color: #ebebeb;
+}
+
+#equals {
+    background-color: #216c85;
+    color: #ebebeb;
+}
+
+.number {
+    background-color: #6f8767;
+    color: #ebebeb;
+}
+
+.operator {
+    background-color: #445c3c;
+    color: #ebebeb;
+}
+
+#zero {
+    grid-area: 5 / 1 / 6 / 3;
+}
+
+#one {
+    grid-area: 4 / 1 / 5 / 2;
+}
+
+#two {
+    grid-area: 4 / 2 / 5 / 3;
+}
+
+#three {
+    grid-area: 4 / 3 / 5 / 4;
+}
+
+#four {
+    grid-area: 3 / 1 / 4 / 2;
+}
+
+#five {
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+#six {
+    grid-area: 3 / 3 / 4 / 4;
+}
+
+#seven {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+#eight {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+#nine {
+    grid-area: 2 / 3 / 3 / 4;
+}
+
+#add {
+    grid-area: 3 / 4 / 4 / 5;
+}
+
+#subtract {
+    grid-area: 2 / 4 / 3 / 5;
+}
+
+#multiply {
+    grid-area: 1 / 4 / 2 / 5;
+}
+
+#divide {
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+#decimal {
+    grid-area: 5 / 3 / 6 / 4;
+}
+
+#equals {
+    grid-area: 4 / 4 / 6 / 5;
+}
+
+#clear {
+    grid-area: 1 / 1 / 2 / 3;
+}

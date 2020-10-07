@@ -9,8 +9,8 @@ const Calculator = () => {
 
   	return (
     	<div>
+			<Display display={display} lastValue={lastValue} />
 	    	<Pad display={display} lastValue={lastValue} operator={operator} setDisplay={setDisplay} setLastValue={setLastValue} setOperator={setOperator} />
-	    	<Display display={display} lastValue={lastValue} />
     	</div>
     );
 }
