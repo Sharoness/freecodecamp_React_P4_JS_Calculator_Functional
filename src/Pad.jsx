@@ -81,6 +81,9 @@ const Pad = ({display, lastValue, operator, setDisplay, setLastValue, setOperato
 
 	const equals = (op) => {
 		return () => {
+			if (operator === "" || display === "") {
+				return;
+			}
 			setLastValue(calculate(operator));
 			setDisplay("");
 			setOperator("");
