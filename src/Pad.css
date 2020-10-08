@@ -1,19 +1,16 @@
+button {
+    font-family: 'Montserrat', sans-serif;
+    border: none;
+    outline: 1px solid #140d0b;
+}
+
 .gridContainer {
     display: grid;
     grid-template-columns: 60px 60px 60px 60px;
-    grid-template-rows: 50px 50px 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px 50px 50px 5px;
     text-align: center;
     justify-content: center;
-}
-
-#clear {
-    background-color: #75260c;
-    color: #ebebeb;
-}
-
-#equals {
-    background-color: #216c85;
-    color: #ebebeb;
+    background-color: #140d0b;
 }
 
 .number {
@@ -21,9 +18,17 @@
     color: #ebebeb;
 }
 
+.number:hover {
+    color: #140d0b;
+}
+
 .operator {
     background-color: #445c3c;
     color: #ebebeb;
+}
+
+.operator:hover {
+    color: #140d0b;
 }
 
 #zero {
@@ -88,8 +93,20 @@
 
 #equals {
     grid-area: 4 / 4 / 6 / 5;
+    background-color: #216c85;
+    color: #ebebeb;
+}
+
+#equals:hover {
+    color: #140d0b;
 }
 
 #clear {
     grid-area: 1 / 1 / 2 / 3;
+    background-color: #75260c;
+    color: #ebebeb;
+}
+
+#clear:hover {
+    color: #140d0b;
 }

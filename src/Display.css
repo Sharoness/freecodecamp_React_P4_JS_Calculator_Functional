@@ -1,5 +1,8 @@
 #display {
+    font-family: 'Montserrat', sans-serif;
     background-color: #140d0b;
     color: white;
+    height: 30px;
+    padding: 5px;
+    text-align: right;
 }
-
