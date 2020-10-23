@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/freecodecamp_React_P4_JS_Calculator_Functional/static/css/main.a79a753c.chunk.css",
+    "main.js": "/freecodecamp_React_P4_JS_Calculator_Functional/static/js/main.b521fa6b.chunk.js",
+    "main.js.map": "/freecodecamp_React_P4_JS_Calculator_Functional/static/js/main.b521fa6b.chunk.js.map",
+    "runtime-main.js": "/freecodecamp_React_P4_JS_Calculator_Functional/static/js/runtime-main.affea776.js",
+    "runtime-main.js.map": "/freecodecamp_React_P4_JS_Calculator_Functional/static/js/runtime-main.affea776.js.map",
+    "static/js/2.d74c26b5.chunk.js": "/freecodecamp_React_P4_JS_Calculator_Functional/static/js/2.d74c26b5.chunk.js",
+    "static/js/2.d74c26b5.chunk.js.map": "/freecodecamp_React_P4_JS_Calculator_Functional/static/js/2.d74c26b5.chunk.js.map",
+    "index.html": "/freecodecamp_React_P4_JS_Calculator_Functional/index.html",
+    "precache-manifest.fb14043a94279b5022ca6ec822471c71.js": "/freecodecamp_React_P4_JS_Calculator_Functional/precache-manifest.fb14043a94279b5022ca6ec822471c71.js",
+    "service-worker.js": "/freecodecamp_React_P4_JS_Calculator_Functional/service-worker.js",
+    "static/css/main.a79a753c.chunk.css.map": "/freecodecamp_React_P4_JS_Calculator_Functional/static/css/main.a79a753c.chunk.css.map",
+    "static/js/2.d74c26b5.chunk.js.LICENSE.txt": "/freecodecamp_React_P4_JS_Calculator_Functional/static/js/2.d74c26b5.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.affea776.js",
+    "static/js/2.d74c26b5.chunk.js",
+    "static/css/main.a79a753c.chunk.css",
+    "static/js/main.b521fa6b.chunk.js"
+  ]
+}
